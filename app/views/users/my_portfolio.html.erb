@@ -1,0 +1,25 @@
+<h1>My Portfolio</h1>
+
+<div class="search-area">
+  <h3>Search Stocks</h3>
+  <%= form_tag search_stock_path, method: :get do %>
+  <div class="form-group row">
+    <div class="col-sm-9 pr-0">
+      <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true, class: "form-control form-control-lg" %>
+    </div>
+    <div class="col-sm-3 pl-0">
+      <%= button_tag type: :submit, class: "btn btn-success" do %>
+        <%= fa_icon 'search 2x' %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<% if @akcija %>
+  <div class="card card-header results-block">
+    <strong>Symbol: </strong><%= @akcija.ticker %>
+    <strong>Name: </strong><%= @akcija.name %>
+    <strong>Price: </strong><%= @akcija.last_price %>
+  </div>
+<% end %>
+
