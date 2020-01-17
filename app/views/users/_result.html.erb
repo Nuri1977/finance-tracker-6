@@ -7,5 +7,18 @@
     <strong>Symbol: </strong><%= @akcija.ticker %>
     <strong>Name: </strong><%= @akcija.name %>
     <strong>Price: </strong><%= @akcija.last_price %>
+    <% if current_user.can_track_stock?(@akcija.ticker) %>
+      <%= link_to "Add to portfolio", user_stocks_path(user: current_user, ticker: @akcija.ticker), class:"btn btn-xs btn-success ml-2" ,method: :post %>
+    <% else %>
+      <span class="badge badge-secondary ml-1">
+        You are already tracking
+        <% if !current_user.under_stock_limit? %>
+          10 stocks
+        <% end %>
+        <% if current_user.stock_already_tracked?(@akcija.ticker) %>
+          this stock
+        <% end %>
+      </span>
+    <% end %>
   </div>
 <% end %>
