@@ -1,0 +1,28 @@
+<% if not @prateni_akcii.empty? %>
+  <div class="row mt-4">
+    <div class="col-9">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @prateni_akcii.each do |akcija| %>
+            <tr>
+              <th scope="row"><%= akcija.ticker %></th>
+              <td><%= akcija.name %></td>
+              <td><%= akcija.last_price %></td>
+              <td><%= 'Action placholder' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+Your not tracking any stocks
+<% end %>
