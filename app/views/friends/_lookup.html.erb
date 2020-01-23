@@ -2,10 +2,10 @@
 
 <div class="search-area">
   <h3>Search for friends</h3>
-  <%= form_tag search_friends_path, method: :get do %>
+  <%= form_tag search_friends_path, remote: true, method: :get do %>
   <div class="form-group row">
     <div class="col-sm-9 pr-0">
-      <%= text_field_tag :search_param, params[:search_param], placeholder: "Enter name or email", autofocus: true, class: "form-control form-control-lg" %>
+      <%= text_field_tag :friend, params[:friend], placeholder: "Enter name or email", autofocus: true, class: "form-control form-control-lg" %>
     </div>
     <div class="col-sm-3 pl-0">
       <%= button_tag type: :submit, class: "btn btn-success" do %>

@@ -233,7 +233,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootsnap (>= 1.4.2)
+  bootsnap
   byebug
   capybara (>= 2.15)
   devise
