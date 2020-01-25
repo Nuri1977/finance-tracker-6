@@ -20,7 +20,7 @@
               <td><%= friend.full_name %></td>
               <td><%= friend.email %></td>
               <td>
-                <%= link_to "View Profile", user_path(friend), class: "btn btn-primary btn-sm" %>
+                <%= link_to "View Profile", user_path(friend), class: "btn btn-success btn-sm" %>
                 <%= link_to 'Stop_following',friendship_path(friend), method: :delete, data: {confirm: 'Are you sure?'},
                                            class: 'btn btn-sm btn-danger' %>
               </td>

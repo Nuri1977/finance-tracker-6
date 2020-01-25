@@ -19,5 +19,9 @@
 
 </div>
 
-<%= render 'stocks/list' %>
+<% if not @prateni_akcii.empty? %>
+  <%= render 'stocks/list' %>
+<% else %>
+    Your not tracking any stocks
+<% end %>
 

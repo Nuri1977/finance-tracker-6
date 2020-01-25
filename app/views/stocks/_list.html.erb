@@ -1,29 +1,43 @@
-<% if not @prateni_akcii.empty? %>
-  <div class="row mt-4">
-    <div class="col-9">
-      <table class="table table-bordered table-hover">
-        <thead>
+<div class="row mt-4">
+  <div class="col-9">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Ticker</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @prateni_akcii.each do |akcija| %>
           <tr>
-            <th scope="col">Ticker</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Actions</th>
+            <th scope="row"><%= akcija.ticker %></th>
+            <td><%= akcija.name %></td>
+            <td><%= akcija.last_price %></td>
+            <td>
+              <% if current_user.can_track_stock?(akcija.ticker) %>
+                <%= link_to "Add to portfolio", user_stocks_path(user: current_user, ticker: akcija.ticker), class:"btn btn-xs btn-success ml-2" ,method: :post %>
+              <% elsif current_user.id != @korisnik.id %>
+                <span class="badge badge-secondary ml-1">
+                  You are already tracking
+                  <% if !current_user.under_stock_limit? %>
+                    10 stocks
+                  <% end %>
+                  <% if current_user.stock_already_tracked?(akcija.ticker) %>
+                    this stock
+                  <% end %>
+                </span>
+              <% end %>           
+          
+              <% if current_user.id == @korisnik.id %>
+                <%= link_to 'Remove',user_stock_path(akcija), method: :delete, data: {confirm: 'Are you sure?'},
+                                        class: 'btn btn-sm btn-warning' %>
+              <% end %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @prateni_akcii.each do |akcija| %>
-            <tr>
-              <th scope="row"><%= akcija.ticker %></th>
-              <td><%= akcija.name %></td>
-              <td><%= akcija.last_price %></td>
-              <td><%= link_to 'Remove',user_stock_path(akcija), method: :delete, data: {confirm: 'Are you sure?'},
-                                           class: 'btn btn-sm btn-warning' %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% else %>
-Your not tracking any stocks
-<% end %>
+</div>

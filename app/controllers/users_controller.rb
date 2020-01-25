@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def my_portfolio
     @prateni_akcii = current_user.stocks
-    @user = current_user
+    @korisnik = current_user
+  end
+
+  def show
+    @korisnik = User.find(params[:id])
+    @prateni_akcii = @korisnik.stocks
   end
 
   def my_friends
